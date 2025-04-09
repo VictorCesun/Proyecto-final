@@ -1,0 +1,67 @@
+{% extends "base_docentes.html" %}
+{% block title %}Tomar Asistencia{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Tomar Asistencia</h1>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label for="id_materia" class="form-label fw-bold">Materia:</label>
+      <select name="materia" id="id_materia" class="form-select">
+        <option value="">--Seleccione materia--</option>
+        {% for mat in materias %}
+        <option value="{{ mat.id }}">{{ mat.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="id_fecha" class="form-label fw-bold">Fecha:</label>
+      <input type="date" name="fecha" id="id_fecha" 
+             class="form-control" value="{{ fecha_hoy|date:'Y-m-d' }}">
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for alumno in alumnos %}
+      <tr>
+        <td>{{ alumno.nombre }} {{ alumno.apellido }}</td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="estado_{{ alumno.id }}" value="P" checked>
+            <label class="form-check-label">Presente</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="estado_{{ alumno.id }}" value="F">
+            <label class="form-check-label">Falta</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="estado_{{ alumno.id }}" value="R">
+            <label class="form-check-label">Retardo</label>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <button type="submit" class="btn btn-creative">Guardar Asistencia</button>
+</form>
+{% endblock %}

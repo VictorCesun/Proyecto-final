@@ -1,0 +1,35 @@
+{% extends "base_alumnos.html" %}
+{% block title %}Mis Asistencias{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Mis Asistencias</h2>
+
+<table class="table table-hover table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th>Materia</th>
+      <th>Fecha</th>
+      <th>Presente</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for asistencia in asistencias %}
+    <tr>
+      <td>{{ asistencia.materia.nombre }}</td>
+      <td>{{ asistencia.fecha }}</td>
+      <td>
+        {% if asistencia.presente %}
+          <span class="text-success fw-bold">&#10004;</span>
+        {% else %}
+          <span class="text-danger fw-bold">&#10006;</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3" class="text-center">No se han registrado asistencias.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base_docentes.html" %}
+{% block title %}Lista de Alumnos{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Lista de Alumnos</h2>
+<form method="POST" action="{% url 'registrar_asistencia' %}">
+  {% csrf_token %}
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Asistencia</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for alumno in alumnos %}
+      <tr>
+        <td>{{ alumno.nombre }} {{ alumno.apellido }}</td>
+        <td>
+          <input type="checkbox" name="asistencia_{{ alumno.id }}" 
+                 id="asistencia_{{ alumno.id }}">
+        </td>
+        <td>
+          <input type="date" name="fecha_{{ alumno.id }}" value="{{ today_date }}">
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-creative">Guardar Asistencia</button>
+</form>
+{% endblock %}

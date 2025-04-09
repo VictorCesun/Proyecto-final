@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+    <div class="register-container">
+        <form method="post">
+            {% csrf_token %}
+            <h1>Registro</h1>
+            {{ form.as_p }}
+            <button type="submit">Registrar</button>
+        </form>
+
+        <!-- Botón de enlace a la página de inicio de sesión -->
+        <a href="{% url 'login' %}">
+            <button type="button" class="login-btn">Ya tengo cuenta</button>
+        </a>
+    </div>
+</body>
+</html>

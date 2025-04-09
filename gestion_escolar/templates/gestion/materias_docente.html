@@ -1,0 +1,13 @@
+{% extends "base_docentes.html" %}
+{% block title %}Mis Materias{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Mis Materias</h2>
+<ul class="list-group">
+  {% for materia in materias %}
+    <li class="list-group-item">{{ materia.nombre }}</li>
+  {% empty %}
+    <li class="list-group-item text-muted">No tienes materias asignadas.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

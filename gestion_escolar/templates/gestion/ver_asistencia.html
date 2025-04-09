@@ -1,0 +1,39 @@
+{% extends "base_alumnos.html" %}
+{% block title %}Ver Asistencia{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Asistencias Registradas</h1>
+
+<!-- Campo de búsqueda -->
+<form method="get" class="mb-4">
+  <div class="input-group">
+    <input type="text" name="q" class="form-control" placeholder="Buscar alumno..." value="{{ query }}">
+    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+  </div>
+</form>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Fecha</th>
+      <th>Alumno</th>
+      <th>Materia</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for a in asistencias %}
+    <tr>
+      <td>{{ a.fecha }}</td>
+      <td>{{ a.alumno.nombre }} {{ a.alumno.apellido }}</td>
+      <td>{{ a.materia.nombre }}</td>
+      <td>{{ a.get_estado_display }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4" class="text-center">No se encontraron asistencias.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

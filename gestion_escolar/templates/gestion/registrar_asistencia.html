@@ -1,0 +1,40 @@
+{% extends "base_alumnos.html" %}
+{% block title %}Registrar Asistencia{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Registrar Asistencia de los Alumnos</h2>
+<form method="post" class="row g-3">
+  {% csrf_token %}
+
+  <div class="col-md-4">
+    <label for="{{ form.alumno.id_for_label }}" class="form-label fw-bold">Alumno:</label>
+    {{ form.alumno }}
+  </div>
+
+  <div class="col-md-4">
+    <label for="{{ form.materia.id_for_label }}" class="form-label fw-bold">Materia:</label>
+    {{ form.materia }}
+  </div>
+
+  <div class="col-md-4">
+    <label for="{{ form.fecha.id_for_label }}" class="form-label fw-bold">Fecha:</label>
+    {{ form.fecha }}
+  </div>
+
+  <!-- Si conservas 'presente' y 'falta' (modelo anterior) -->
+  <div class="col-md-6">
+    <label for="{{ form.presente.id_for_label }}" class="form-label fw-bold">Presente:</label>
+    {{ form.presente }}
+  </div>
+
+  <div class="col-md-6">
+    <label for="{{ form.falta.id_for_label }}" class="form-label fw-bold">Falta:</label>
+    {{ form.falta }}
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-creative">Guardar Asistencia</button>
+    <a href="{% url 'ver_asistencia' %}" class="btn btn-secondary">Visualizar Asistencias</a>
+  </div>
+</form>
+{% endblock %}

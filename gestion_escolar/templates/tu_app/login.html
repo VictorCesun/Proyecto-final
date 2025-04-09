@@ -1,0 +1,53 @@
+{% extends "base_alumnos.html" %}
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<div class="row g-0" style="min-height: 85vh;">
+  <!-- Columna izquierda: imagen o gradiente -->
+  <div class="col-md-6 d-none d-md-block" 
+       style="
+         background: url('https://picsum.photos/900/1200?grayscale') no-repeat center center;
+         background-size: cover;
+       ">
+    <!-- 
+      Puedes usar tu propia imagen o un gradiente:
+      Ejemplo: background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+    -->
+  </div>
+
+  <!-- Columna derecha: formulario de Login -->
+  <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: #f9fafc;">
+    <div class="p-4" style="max-width: 400px; width: 100%;">
+      <h2 class="mb-3 text-center fw-bold">Bienvenido</h2>
+      <p class="text-muted text-center mb-4">
+        Accede a tu cuenta para gestionar asistencias y calificaciones.
+      </p>
+      
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info" role="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+        </div>
+        <div class="mb-3">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-creative w-100">Ingresar</button>
+      </form>
+
+      <hr>
+      <p class="text-center">
+        ¿No tienes cuenta?
+        <a href="{% url 'registro' %}" class="text-decoration-none">Regístrate</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
